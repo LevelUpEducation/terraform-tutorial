@@ -1,0 +1,75 @@
+
+---
+- hosts: all 
+  remote_user: root
+  become: yes
+  become_method: sudo
+  vars_prompt:
+  - name: "sshKey"
+    prompt: "Enter ssh key file path: (ignore if local)"
+    default: "/home/st/.ssh/caylent-staging-master"
+  - name: "version"
+    prompt: "Enter please enter php version:"
+    default: "7.0"
+  - name: updateRepo
+    prompt: "Would you like to update apt repo?"
+    default: "no"
+  tasks:
+  - name: update repo when add
+    apt:
+        update_cache: yes
+    when: updateRepo == "yes"
+
+  - name: "install php base"
+    apt: 
+        name: "php{{ version }}"
+        state: present
+        install_recommends: yes
+        allow_unauthenticated: yes
+  - name: "install php-fpm base"
+    apt: 
+        name: "php{{ version }}-fpm"
+        state: present
+        install_recommends: yes
+        allow_unauthenticated: yes
+  - name: "install php common"
+    apt: 
+        name: "php{{ version }}-common"
+        state: present
+        install_recommends: yes
+        allow_unauthenticated: yes
+  - name: "install php curl"
+    apt: 
+        name: "php{{ version }}-curl"
+        state: present
+        install_recommends: yes
+        allow_unauthenticated: yes
+  - name: "install php mbstring"
+    apt: 
+        name: "php{{ version }}-mbstring"
+        state: present
+        install_recommends: yes
+        allow_unauthenticated: yes
+  - name: "install php mysql"
+    apt: 
+        name: "php{{ version }}-mysql"
+        state: present
+        install_recommends: yes
+        allow_unauthenticated: yes
+  - name: "install php dev"
+    apt: 
+        name: "php{{ version }}-dev"
+        state: present
+        install_recommends: yes
+        allow_unauthenticated: yes
+
+    
+  - name: "update php-fpm"
+    copy: 
+        src: Templates/php-fpm.conf
+        dest: /etc/php/7.0/fpm
+        mode: 0644
+        owner: "root"
+        group: "root"
+        force: yes
+
