@@ -20,6 +20,7 @@ variable "us-west-zones" {
 }
 
 resource "aws_instance" "west_frontend" {
+  count             = 2
   depends_on        = ["aws_instance.west_backend"]
   provider          = "aws.us-west-1"
   ami               = "ami-07585467"
@@ -32,6 +33,7 @@ resource "aws_instance" "west_frontend" {
 }
 
 resource "aws_instance" "frontend" {
+  count             = 2
   depends_on        = ["aws_instance.backend"]
   availability_zone = "${var.us-east-zones[count.index]}"
   ami               = "ami-66506c1c"
