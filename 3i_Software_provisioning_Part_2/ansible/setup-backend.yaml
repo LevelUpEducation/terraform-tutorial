@@ -1,0 +1,30 @@
+---
+- hosts: all
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  pre_tasks:
+    - name: 'install python2'
+      raw: sudo apt-get -y install python-simplejson
+  tasks:
+    - name: Running apt update
+      apt: update_cache=yes
+    - name: Installing required packages
+      apt: name={{item}} state=present
+      with_items:
+       - git
+       - python3-pip
+       - python-psycopg2
+
+    - name: pull branch master
+      git:
+        repo=https://github.com/cyantarek/django-ansible-test.git
+        dest=/deploy/backend/
+        accept_hostkey=yes
+    - name: install python requirements
+      pip: executable=pip3 requirements=/deploy/backend/requirements.txt
+    - name: run server
+      shell: python3 /deploy/backend/manage.py runserver 0.0.0.0:80 >/dev/null 2>&1 &
+      async: 45
+      poll: 0
+

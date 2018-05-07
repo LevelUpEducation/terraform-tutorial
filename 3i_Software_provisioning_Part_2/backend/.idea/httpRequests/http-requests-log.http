@@ -1,0 +1,96 @@
+GET http://localhost:8000/api/v1/response
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-04-26T033934.200.json
+
+###
+
+GET http://localhost:8000/api/v1/response
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-04-26T033256.200.json
+
+###
+
+GET http://localhost:8080/api/v1/response
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-04-26T033248.404.txt
+
+###
+
+GET http://localhost:8080/api/v1/response
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-04-26T033247-3.404.txt
+
+###
+
+GET http://localhost:8080/api/v1/response
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-04-26T033247-2.404.txt
+
+###
+
+GET http://localhost:8080/api/v1/response
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-04-26T033247-1.404.txt
+
+###
+
+GET http://localhost:8080/api/v1/response
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-04-26T033247.404.txt
+
+###
+
+GET http://localhost:8080/api/v1/response
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-04-26T033246-1.404.txt
+
+###
+
+GET http://localhost:8080/api/v1/response
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-04-26T033246.404.txt
+
+###
+
+GET http://localhost:8080/api/v1/response
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-04-26T033244.404.txt
+
+###
+
+GET http://localhost:8080/api/v1/response
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-04-26T033243.404.txt
+
+###
+
+GET http://localhost:8080/api/v1/response
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-04-26T033228.404.txt
+
+###
+

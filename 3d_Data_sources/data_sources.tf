@@ -1,14 +1,10 @@
 provider "aws" {
-  access_key = "ACCESS_KEY"
-  secret_key = "SECRET_KEY"
-  region     = "us-east-1"
+  region = "us-east-1"
 }
 
 provider "aws" {
-  alias      = "us-west-1"
-  access_key = "ACCESS_KEY"
-  secret_key = "SECRET_KEY"
-  region     = "us-west-1"
+  alias  = "us-west-1"
+  region = "us-west-1"
 }
 
 data "aws_availability_zones" "us-east-1" {}
