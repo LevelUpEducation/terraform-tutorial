@@ -1,5 +1,5 @@
 resource "aws_security_group" "allow_http" {
-  name        = "allow_all"
+  name        = "allow_http"
   description = "Allow inbound traffic"
   vpc_id      = "${module.vpc.vpc_id}"
 
