@@ -3,7 +3,7 @@ module "kubernetes" {
   region = "us-east1"
 
   project_id_map = {
-    default = "stefan-personal-196107"
+    default = "stefan-terraform-demo"
   }
 }
 

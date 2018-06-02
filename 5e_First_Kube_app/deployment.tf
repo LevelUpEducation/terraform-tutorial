@@ -21,25 +21,25 @@ resource "kubernetes_deployment" "nginx" {
 
       spec {
         container {
-          image = "nginx:1.8"
+          image = "nginx"
           name  = "app"
 
           resources {
             requests {
-              memory = "1Gi"
-              cpu    = "1"
+              memory = "256Mi"
+              cpu    = "100m"
             }
 
             limits {
-              memory = "2Gi"
-              cpu    = "2"
+              memory = "1Gi"
+              cpu    = "500m"
             }
           }
 
           readiness_probe {
             http_get {
-              path = "/health"
-              port = "90"
+              path = "/"
+              port = "80"
             }
 
             initial_delay_seconds = 10
@@ -47,43 +47,44 @@ resource "kubernetes_deployment" "nginx" {
           }
 
           liveness_probe {
-            exec {
-              command = ["/bin/health"]
+            http_get {
+              path = "/"
+              port = "80"
             }
 
             initial_delay_seconds = 120
             period_seconds        = 15
           }
 
-          env {
-            name  = "CONFIG_FILE_LOCATION"
-            value = "/etc/app/config"
-          }
-
           port {
             container_port = 80
-          }
-
-          volume_mount {
-            name       = "config"
-            mount_path = "/etc/app/config"
-          }
-        }
-
-        init_container {
-          name    = "helloworld"
-          image   = "debian"
-          command = ["/bin/echo", "hello", "world"]
-        }
-
-        volume {
-          name = "config"
-
-          config_map {
-            name = "app-config"
           }
         }
       }
     }
   }
+}
+
+resource "kubernetes_service" "example" {
+  metadata {
+    name = "terraform-nginx-example"
+  }
+
+  spec {
+    selector {
+      app = "nginx"
+    }
+
+    session_affinity = "ClientIP"
+
+    port {
+      port = 80
+    }
+
+    type = "LoadBalancer"
+  }
+}
+
+output "lb_ip" {
+  value = "${kubernetes_service.example.load_balancer_ingress.0.ip}"
 }
