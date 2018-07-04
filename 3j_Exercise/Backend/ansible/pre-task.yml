@@ -1,0 +1,13 @@
+---
+###############################################################################
+# Ubuntu 16.04 require this
+##############################################################################
+- hosts: all
+  remote_user: root
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  vars_prompt:
+  - name: "sshKey"
+    prompt: "Enter ssh key file path: (ignore if local)"
+    default: "/home/st/.ssh/github-personal"
